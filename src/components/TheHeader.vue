@@ -15,6 +15,7 @@
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 10;
   width: 100%;
   height: 60px;
   background: rgb(10, 20, 110);
@@ -25,6 +26,13 @@
   height: 60px;
   padding: 0 120px;
   box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .page-header .header {
+    width: 90%;
+    padding: 0;
+    margin: 0 auto;
+  }
 }
 .header__logo {
   text-align: left;

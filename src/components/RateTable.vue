@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import Flag from '@/components/Flag.vue'
+import trashIcon from '@/assets/trash.svg?raw'
 import { useStore } from '@/store'
 import { Currency } from '@/service/rate'
 
 import AppButton from './AppButton.vue'
 
 interface RelativeCurrency extends Currency {
-  relative: number
+  relative: string
 }
 
 const store = useStore()
@@ -29,7 +30,11 @@ const selectedRateList = computed<RelativeCurrency[]>(() => {
       const relativeValue = baseRate.value
         ? item.value / baseRate.value
         : item.value
-      const relative = parseFloat(relativeValue.toFixed(4))
+      let relative = relativeValue.toFixed(4)
+
+      if (parseFloat(relative) <= 0) {
+        relative = '0.0001'
+      }
 
       return {
         ...item,
@@ -41,7 +46,7 @@ const selectedRateList = computed<RelativeCurrency[]>(() => {
   if (pinnedCurrency.value) {
     result.push({
       ...pinnedCurrency.value,
-      relative: 1,
+      relative: '1',
     })
   }
 
@@ -54,11 +59,6 @@ const selectedRateList = computed<RelativeCurrency[]>(() => {
 const pin = (code: string): void => {
   store.commit('pin', code)
 }
-
-// Handle remove event
-const canRemove = computed<boolean>(() => {
-  return store.state.selectedCodes.length > 3
-})
 
 const remove = (code: string): void => {
   store.commit('removeSelectedCode', code)
@@ -90,9 +90,9 @@ const remove = (code: string): void => {
             }"
             @click="pin(item.code)"
           >
-            <span class="rate-table__flag">
+            <div class="rate-table__flag">
               <flag :type="item.code" />
-            </span>
+            </div>
             <span class="rate-table__full-name">{{ item.name }}</span>
             <span class="rate-table__short-name">{{
               item.code.toUpperCase()
@@ -108,16 +108,21 @@ const remove = (code: string): void => {
                 : 'rate-table__value--down'
             }`"
           >
-            {{ item.code === pinned ? '' : `${item.trending}%` }}
+            {{ item.code === pinned ? '' : `${item.trending.toFixed(2)}%` }}
           </div>
           <div class="rate-table__value">
             <app-button
               type="primary"
               v-show="item.code !== pinned"
-              :disabled="!canRemove"
               @click="remove(item.code)"
               >Remove</app-button
             >
+            <span
+              class="rate-table__trash"
+              v-show="item.code !== pinned"
+              @click="remove(item.code)"
+              v-html="trashIcon"
+            ></span>
           </div>
         </div>
       </transition-group>
@@ -137,14 +142,11 @@ const remove = (code: string): void => {
   padding: 0 16px;
   font-size: 18px;
   font-weight: 600;
-  text-align: center;
+  text-align: right;
   color: rgb(20, 30, 55);
 }
 .rate-table__label:first-child {
   text-align: left;
-}
-.rate-table__label:last-child {
-  text-align: right;
 }
 .rate-table__row {
   display: flex;
@@ -164,18 +166,15 @@ const remove = (code: string): void => {
 }
 .rate-table__value {
   width: 25%;
-  padding: 16px;
+  padding: 12px;
   font-size: 16px;
   font-weight: 600;
-  text-align: center;
+  text-align: right;
 }
 .rate-table__value:first-child {
   display: flex;
   align-items: center;
   text-align: left;
-}
-.rate-table__value:last-child {
-  text-align: right;
 }
 .rate-table__value--up {
   color: rgb(38, 171, 44);
@@ -209,15 +208,14 @@ const remove = (code: string): void => {
 }
 .rate-table__row.pinned .rate-table__rate:after {
   position: absolute;
-  left: 50%;
-  bottom: -29px;
+  right: 10px;
+  bottom: -33px;
   display: block;
   width: 0;
   height: 0;
   content: '';
   border: 10px solid transparent;
   border-top-color: rgb(10, 20, 110);
-  margin-left: -10px;
 }
 .rate-table-list-enter-active,
 .rate-table-list-leave-active {
@@ -231,11 +229,21 @@ const remove = (code: string): void => {
 .rate-table-list-move {
   transition: transform 1s ease;
 }
+.rate-table__trash {
+  display: none;
+}
 
 @media (max-width: 768px) {
   .rate-table__label:nth-child(3),
   .rate-table__value:nth-child(3) {
     display: none;
+  }
+
+  .rate-table__value .app-btn {
+    display: none;
+  }
+  .rate-table__trash {
+    display: inline-block;
   }
 }
 </style>

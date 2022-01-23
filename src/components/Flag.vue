@@ -3,13 +3,13 @@ import defaultIcon from '@/assets/flags/default.svg?raw'
 import aed from '@/assets/flags/aed.svg?raw'
 import ars from '@/assets/flags/ars.svg?raw'
 import aud from '@/assets/flags/aud.svg?raw'
-import bch from '@/assets/flags/bch.svg?raw'
-import bcn from '@/assets/flags/bcn.svg?raw'
+// import bch from '@/assets/flags/bch.svg?raw'
+// import bcn from '@/assets/flags/bcn.svg?raw'
 import bdt from '@/assets/flags/bdt.svg?raw'
 import bhd from '@/assets/flags/bhd.svg?raw'
-import bits from '@/assets/flags/bits.svg?raw'
+// import bits from '@/assets/flags/bits.svg?raw'
 import bmd from '@/assets/flags/bmd.svg?raw'
-import bnb from '@/assets/flags/bnb.svg?raw'
+// import bnb from '@/assets/flags/bnb.svg?raw'
 import brl from '@/assets/flags/brl.svg?raw'
 import btc from '@/assets/flags/btc.svg?raw'
 import cad from '@/assets/flags/cad.svg?raw'
@@ -18,9 +18,9 @@ import clp from '@/assets/flags/clp.svg?raw'
 import cny from '@/assets/flags/cny.svg?raw'
 import czk from '@/assets/flags/czk.svg?raw'
 import dkk from '@/assets/flags/dkk.svg?raw'
-import dot from '@/assets/flags/dot.svg?raw'
-import eos from '@/assets/flags/eos.svg?raw'
-import eth from '@/assets/flags/eth.svg?raw'
+// import dot from '@/assets/flags/dot.svg?raw'
+// import eos from '@/assets/flags/eos.svg?raw'
+// import eth from '@/assets/flags/eth.svg?raw'
 import eur from '@/assets/flags/eur.svg?raw'
 import gbp from '@/assets/flags/gbp.svg?raw'
 import hkd from '@/assets/flags/hkd.svg?raw'
@@ -31,9 +31,9 @@ import inr from '@/assets/flags/inr.svg?raw'
 import jpy from '@/assets/flags/jpy.svg?raw'
 import krw from '@/assets/flags/krw.svg?raw'
 import kwd from '@/assets/flags/kwd.svg?raw'
-import link from '@/assets/flags/link.svg?raw'
+// import link from '@/assets/flags/link.svg?raw'
 import lkr from '@/assets/flags/lkr.svg?raw'
-import ltc from '@/assets/flags/ltc.svg?raw'
+// import ltc from '@/assets/flags/ltc.svg?raw'
 import mmk from '@/assets/flags/mmk.svg?raw'
 import mxn from '@/assets/flags/mxn.svg?raw'
 import myr from '@/assets/flags/myr.svg?raw'
@@ -57,9 +57,9 @@ import vnd from '@/assets/flags/vnd.svg?raw'
 import xag from '@/assets/flags/xag.svg?raw'
 import xau from '@/assets/flags/xau.svg?raw'
 import xdr from '@/assets/flags/xdr.svg?raw'
-import xlm from '@/assets/flags/xlm.svg?raw'
-import xrp from '@/assets/flags/xrp.svg?raw'
-import yfi from '@/assets/flags/yfi.svg?raw'
+// import xlm from '@/assets/flags/xlm.svg?raw'
+// import xrp from '@/assets/flags/xrp.svg?raw'
+// import yfi from '@/assets/flags/yfi.svg?raw'
 import zar from '@/assets/flags/zar.svg?raw'
 
 interface FlagProps {
@@ -72,13 +72,13 @@ const icons: Record<string, string> = {
   aed,
   ars,
   aud,
-  bch,
-  bcn,
+  // bch,
+  // bcn,
   bdt,
   bhd,
-  bits,
+  // bits,
   bmd,
-  bnb,
+  // bnb,
   brl,
   btc,
   cad,
@@ -87,9 +87,9 @@ const icons: Record<string, string> = {
   cny,
   czk,
   dkk,
-  dot,
-  eos,
-  eth,
+  // dot,
+  // eos,
+  // eth,
   eur,
   gbp,
   hkd,
@@ -100,9 +100,9 @@ const icons: Record<string, string> = {
   jpy,
   krw,
   kwd,
-  link,
+  // link,
   lkr,
-  ltc,
+  // ltc,
   mmk,
   mxn,
   myr,
@@ -126,9 +126,9 @@ const icons: Record<string, string> = {
   xag,
   xau,
   xdr,
-  xlm,
-  xrp,
-  yfi,
+  // xlm,
+  // xrp,
+  // yfi,
   zar,
 }
 const icon = icons[props.type] || icons.defaultIcon
@@ -142,5 +142,8 @@ const icon = icons[props.type] || icons.defaultIcon
 .flag {
   width: 28px;
   color: currentColor;
+}
+.flag svg {
+  display: block;
 }
 </style>

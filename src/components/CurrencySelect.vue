@@ -42,8 +42,13 @@ const search = (value: string): void => {
 }
 
 const change = (value: string | number): void => {
-  store.commit('addSelectedCode', value)
   emit('update:visible', false)
+
+  if (!value) {
+    return
+  }
+
+  store.commit('addSelectedCode', value)
 }
 </script>
 
@@ -77,6 +82,17 @@ const change = (value: string | number): void => {
   position: absolute;
   left: 0;
   top: 0;
+}
+@media (max-width: 640px) {
+  .select-currency {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+  }
 }
 .currency-option {
   display: flex;

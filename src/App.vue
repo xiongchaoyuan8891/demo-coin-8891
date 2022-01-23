@@ -7,6 +7,7 @@ import RateTable from '@/components/RateTable.vue'
 import AppProgress from '@/components/AppProgress.vue'
 import CurrencySelect from '@/components/CurrencySelect.vue'
 import useInterval from '@/compositions/use-interval'
+import { format } from '@/service/date'
 
 const store = useStore()
 
@@ -16,9 +17,15 @@ const refreshCountdown = ref<number>(0)
 const countdownPercentage = computed<number>(() => {
   return Math.round((refreshCountdown.value / 60) * 100)
 })
-const lastUpdatedAt = computed<Date | undefined>(
-  () => store.state.lastUpdatedAt
-)
+const lastUpdatedAt = computed<string>(() => {
+  const date = store.state.lastUpdatedAt
+
+  if (!date) {
+    return ''
+  }
+
+  return format(date)
+})
 
 useInterval(
   () => {
@@ -88,7 +95,7 @@ const hasError = computed<boolean>(() => {
           </div>
           <div class="update-time__value">
             Last updated
-            {{ lastUpdatedAt ? lastUpdatedAt.toLocaleString() : '' }}
+            {{ lastUpdatedAt }}
           </div>
         </div>
       </div>

@@ -49,6 +49,7 @@ const search = (e: Event): void => {
 // Clear the keyword
 const clear = (): void => {
   emit('search', '')
+  emit('change', '')
 
   if (inputRef.value) {
     inputRef.value.value = ''
@@ -136,6 +137,17 @@ provide<(val: SelectedOption) => void>('select-value', selectValue)
   overflow: auto;
   border-radius: 6px;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 640px) {
+  .app-select__ipt input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .app-select__body {
+    height: calc(100vh - 50px);
+    max-height: initial;
+  }
 }
 .app-select--focus .app-select__close,
 .app-select--focus .app-select__body {

@@ -70,7 +70,7 @@ const hasError = computed<boolean>(() => {
 <template>
   <the-header />
   <div class="main-container">
-    <app-section title="Exchange Rates">
+    <app-section :title="$t('sectionTittle')">
       <rate-table />
       <div class="footer">
         <div class="extra" @click.stop>
@@ -82,7 +82,7 @@ const hasError = computed<boolean>(() => {
             @click.stop="showRateAdditionSelect"
           >
             <span class="add-btn__icon"><i>+</i></span>
-            <span class="add-btn__text">Add currency</span>
+            <span class="add-btn__text">{{ $t('add') }}</span>
           </div>
           <currency-select v-model:visible="rateAdditionSelectVisible" />
         </div>
@@ -94,13 +94,13 @@ const hasError = computed<boolean>(() => {
             />
           </div>
           <div class="update-time__value">
-            Last updated
+            {{ $t('lastUpdate') }}
             {{ lastUpdatedAt }}
           </div>
         </div>
       </div>
       <div class="error-message" v-show="hasError">
-        Unable to retrieve fresh rates at this time. Please check your network.
+        {{ $t('tips') }}
       </div>
     </app-section>
   </div>

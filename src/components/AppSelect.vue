@@ -3,6 +3,7 @@ import { ref, onMounted, provide } from 'vue'
 import useOutClick from '@/compositions/use-outclick'
 
 interface AppSelectProps {
+  modelValue?: string | number
   placeholder?: string
   autoFocus?: boolean
 }
@@ -13,6 +14,7 @@ const props = withDefaults(defineProps<AppSelectProps>(), {
 })
 
 interface Emits {
+  (e: 'update:model-value', value: string | number): void
   (e: 'change', value: string | number): void
   (e: 'search', value: string): void
 }
@@ -62,6 +64,7 @@ interface SelectedOption {
 }
 
 const selectValue = (value: SelectedOption): void => {
+  emit('update:model-value', value.value)
   emit('change', value.value)
 
   if (inputRef.value) {
@@ -137,6 +140,7 @@ provide<(val: SelectedOption) => void>('select-value', selectValue)
   overflow: auto;
   border-radius: 6px;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 @media (max-width: 640px) {
   .app-select__ipt input {
@@ -145,8 +149,7 @@ provide<(val: SelectedOption) => void>('select-value', selectValue)
   }
 
   .app-select__body {
-    height: calc(100vh - 50px);
-    max-height: initial;
+    max-height: calc(100vh - 60px);
   }
 }
 .app-select--focus .app-select__close,

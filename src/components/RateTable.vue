@@ -68,10 +68,10 @@ const remove = (code: string): void => {
 <template>
   <div class="rate-table">
     <div class="rate-table__heading">
-      <div class="rate-table__label">Coin</div>
-      <div class="rate-table__label">Amount</div>
-      <div class="rate-table__label">Change</div>
-      <div class="rate-table__label">Action</div>
+      <div class="rate-table__label">{{ $t('coin') }}</div>
+      <div class="rate-table__label">{{ $t('amount') }}</div>
+      <div class="rate-table__label">{{ $t('change') }}</div>
+      <div class="rate-table__label">{{ $t('action') }}</div>
     </div>
     <div class="rate-table__body">
       <transition-group name="rate-table-list">
@@ -115,7 +115,7 @@ const remove = (code: string): void => {
               type="primary"
               v-show="item.code !== pinned"
               @click="remove(item.code)"
-              >Remove</app-button
+              >{{ $t('remove') }}</app-button
             >
             <span
               class="rate-table__trash"

@@ -1,10 +1,27 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import AppSelect from './AppSelect.vue'
+import AppOption from './AppOption.vue'
+</script>
 
 <template>
   <div class="page-header">
     <div class="header">
       <div class="header__logo">
         <img src="@/assets/coingecko-logo-white.webp" alt="" />
+      </div>
+      <div class="header__lang">
+        <span class="lang__label">{{ $t('chooseLang') }}</span>
+        <div class="lang__select">
+          <app-select v-model="$i18n.locale" :placeholder="$t('lang')">
+            <app-option
+              v-for="locale in $i18n.availableLocales"
+              :key="locale"
+              :label="$t('lang', locale)"
+              :value="locale"
+              >{{ $t('lang', locale) }}</app-option
+            >
+          </app-select>
+        </div>
       </div>
     </div>
   </div>
@@ -23,6 +40,9 @@
   box-shadow: rgb(35 55 80 / 30%) 0px 6px 12px;
 }
 .page-header .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 60px;
   padding: 0 120px;
   box-sizing: border-box;
@@ -40,5 +60,23 @@
 .header__logo img {
   height: 48px;
   padding: 6px 0;
+}
+.header__lang {
+  display: flex;
+  align-items: center;
+}
+.lang__label {
+  margin-right: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+@media (max-width: 640px) {
+  .lang__label {
+    display: none;
+  }
+  .lang__select {
+    width: 120px;
+  }
 }
 </style>

@@ -74,6 +74,12 @@ const remove = (code: string): void => {
       <div class="rate-table__label">{{ $t('action') }}</div>
     </div>
     <div class="rate-table__body">
+      <img
+        v-show="selectedRateList.length === 0"
+        class="rate-table__empty"
+        src="@/assets/empty-status.jpg"
+        alt=""
+      />
       <transition-group name="rate-table-list">
         <div
           class="rate-table__row"
@@ -164,6 +170,12 @@ const remove = (code: string): void => {
   border-radius: 8px;
   background-color: rgb(10, 20, 110);
 }
+.rate-table__empty {
+  display: block;
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
 .rate-table__value {
   width: 25%;
   padding: 12px;
@@ -234,6 +246,9 @@ const remove = (code: string): void => {
 }
 
 @media (max-width: 768px) {
+  .rate-table__empty {
+    width: 100%;
+  }
   .rate-table__label:nth-child(3),
   .rate-table__value:nth-child(3) {
     display: none;
